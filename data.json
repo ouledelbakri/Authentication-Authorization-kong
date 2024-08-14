@@ -1,0 +1,6 @@
+{
+    "client_id": "kong-client",
+    "client_secret": "vgpLXdsSyF3qhPX3pAoLUqVAT401Xv1j",
+    "grant_type": "client_credentials",
+    "scope": "email"
+}
