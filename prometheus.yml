@@ -1,10 +1,25 @@
 global:
-  scrape_interval: 15s
+  scrape_interval: 15s  
+  evaluation_interval: 15s     
+
+rule_files:
+  - ./alert.rules.yml          # Inclusion des règles d'alerte
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+            - 'localhost:9093' # Adresse d'Alertmanager
 
 scrape_configs:
   - job_name: 'kong'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    honor_labels: false
+    honor_timestamps: true
+    sample_limit: 0
     static_configs:
-      - targets: ['kong:8001']  # Kong Admin API endpoint with metrics
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']  # Prometheus itself
+      - targets:
+          - 'prometheus:9090'  # Endpoint de Prometheus pour le monitoring interne
+          - 'kong:8001'        # Endpoint de l'API Admin de Kong pour récupérer les métriques

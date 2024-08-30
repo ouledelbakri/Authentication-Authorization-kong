@@ -131,4 +131,4 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin  # change this in production
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # To change before production
