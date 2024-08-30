@@ -2,56 +2,40 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v1
 
-      - name: Install dependencies
-        run: npm install
+    - name: Build Docker containers
+      run: |
+        docker-compose build
 
-      - name: Run tests
-        run: npm test
+    - name: Start Docker containers
+      run: |
+        docker-compose up -d
 
-      - name: Build Docker image
-        run: |
-          docker build -t my-app:latest .
+    - name: Test Kong API
+      run: |
+        curl -i http://localhost:8001/
+        curl -i http://localhost:8001/services
 
-  validate_services:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Run tests
+      run: |
+        # Ajoute ici les tests pour ton application
 
-      - name: Install Docker Compose
-        run: sudo apt-get install -y docker-compose
-
-      - name: Validate Docker Compose
-        run: docker-compose config
-
-      - name: Start services with Docker Compose
-        run: docker-compose up -d
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: validate_services
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy with Docker Compose
-        run: docker-compose up -d --build
+    - name: Deploy Application
+      if: github.ref == 'refs/heads/main'
+      run: |
+        docker-compose down
+        docker-compose up -d
