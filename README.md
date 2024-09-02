@@ -1,7 +1,7 @@
 # Projet de Migration API Gateway chez Gestform
 
 ## Description
-Ce projet vise à moderniser l'infrastructure API de Gestform en migrant d'une API Gateway développée en interne vers une solution plus performante, évolutive et sécurisée, basée sur **Kong**. Cette migration inclut également l'intégration de **Keycloak** pour la gestion des identités et l'utilisation de **Docker** pour déployer une infrastructure conteneurisée. Des outils comme **Prometheus** et **Grafana** sont mis en place pour la surveillance des performances.
+Ce projet vise à indistrualiser l'infrastructure API de Gestform en migrant d'une API Gateway développée en interne vers une solution plus performante, évolutive et sécurisée, basée sur **Kong**. Cette migration inclut également l'intégration de **Keycloak** pour la gestion des identités et l'utilisation de **Docker** pour déployer une infrastructure conteneurisée. Des outils comme **Prometheus** et **Grafana** sont mis en place pour la surveillance des performances.
 
 ## Objectifs
 1. **Évaluation de l'infrastructure API existante** : Identifier les points faibles pour faciliter la migration.
@@ -13,6 +13,7 @@ Ce projet vise à moderniser l'infrastructure API de Gestform en migrant d'une A
 ## Technologies Utilisées
 - **Kong** : API Gateway performante et scalable.
 - **Keycloak** : Gestion des identités et des accès.
+- **konga** : 
 - **Docker** : Conteneurisation des services.
 - **Prometheus & Grafana** : Outils de monitoring et de visualisation des performances.
 
@@ -26,5 +27,3 @@ Ce projet vise à moderniser l'infrastructure API de Gestform en migrant d'une A
 - **Yassine Ouled el Bakri** : Chef de projet et développeur principal.
 - **Damien Marangoni** : Tuteur entreprise.
 
-## License
-Ce projet est sous licence Gestform. 
